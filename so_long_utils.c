@@ -6,16 +6,11 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:16:26 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/14 13:44:40 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:04:59 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-void	lst_free_str(void *content)
-{
-	free(content);
-}
+#include "so_long.h"
 
 size_t	ft_strspn(char *str, char *set)
 {
@@ -39,10 +34,10 @@ size_t	ft_strspn(char *str, char *set)
 	return (i);
 }
 
-void	free_matrix(char **matrix)
+void	sl_free_matrix(char **matrix)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (matrix[i])
 	{
@@ -50,4 +45,55 @@ void	free_matrix(char **matrix)
 		i++;
 	}
 	free(matrix);
+}
+
+char	**sl_copy_matrix(char **matrix)
+{
+	char	**matrix_copy;
+	size_t	i;
+
+	i = 0;
+	while (matrix[i])
+		i++;
+	matrix_copy = malloc((i + 1) * sizeof(char *));
+	i = 0;
+	while (matrix[i])
+	{
+		matrix_copy[i] = malloc((ft_strlen(matrix[i]) + 1) * sizeof(char));
+		ft_strcpy(matrix_copy[i], matrix[i]);
+		i++;
+	}
+	matrix_copy[i] = NULL;
+	return (matrix_copy);
+}
+
+void	sl_flood(char **matrix, t_vec2 pos)
+{
+	if (pos.y < 0 || !(matrix[pos.y]) || pos.x < 0 || !(matrix[pos.y][pos.x])
+		|| !(ft_strchr("0EPC", matrix[pos.y][pos.x])))
+		return ;
+	matrix[pos.y][pos.x] = 'F';
+	sl_flood(matrix, (t_vec2){pos.x + 1, pos.y});
+	sl_flood(matrix, (t_vec2){pos.x - 1, pos.y});
+	sl_flood(matrix, (t_vec2){pos.x, pos.y + 1});
+	sl_flood(matrix, (t_vec2){pos.x, pos.y - 1});
+}
+
+t_vec2	sl_get_pos(char **matrix, char item)
+{
+	t_vec2	pos;
+
+	pos.y = 0;
+	while (matrix[pos.y])
+	{
+		pos.x = 0;
+		while (matrix[pos.y][pos.x])
+		{
+			if (matrix[pos.y][pos.x] == item)
+				return (pos);
+			pos.x++;
+		}
+		pos.y++;
+	}
+	return ((t_vec2){(size_t)(-1), (size_t)(-1)});
 }

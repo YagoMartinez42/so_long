@@ -6,13 +6,18 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:22:51 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/14 16:35:11 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:11:44 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	sl_addline(t_list *map, char *line)
+void	lst_free_str(void *content)
+{
+	free(content);
+}
+
+t_list	*sl_addline(t_list *map, char *line)
 {
 	t_list	*node;
 
@@ -21,10 +26,10 @@ static int	sl_addline(t_list *map, char *line)
 	{
 		ft_printf("Error\nCould not allocate memory.\n");
 		ft_lstclear(&map, lst_free_str);
-		return (0);
+		return (NULL);
 	}
 	ft_lstadd_back(&map, node);
-	return (1);
+	return (map);
 }
 
 static void	sl_rem_nl(t_list *map)
@@ -32,13 +37,16 @@ static void	sl_rem_nl(t_list *map)
 	t_list	*line_node;
 	size_t	map_len;
 
-	map_len = ft_strlen(map->content) - 1;
-	line_node = map;
-	while (line_node)
+	if (map)
 	{
-		if (((char *)line_node->content)[map_len] == '\n')
-			((char *)line_node->content)[map_len] = '\0';
-		line_node = line_node->next;
+		map_len = (ft_strlen(map->content)) - 1;
+		line_node = map;
+		while (line_node)
+		{
+			if (((char *)line_node->content)[map_len] == '\n')
+				((char *)line_node->content)[map_len] = '\0';
+			line_node = line_node->next;
+		}
 	}
 }
 
@@ -50,17 +58,15 @@ t_list	*sl_load_map(char *map_file)
 
 	fd_ber = open(map_file, O_RDONLY);
 	if (fd_ber < 0)
-	{
-		ft_printf("Error\n While opening file.\n");
 		return (NULL);
-	}
 	map = NULL;
 	while (1)
 	{
 		line = get_next_line(fd_ber);
 		if (line)
 		{
-			if (!(sl_addline(map, line)))
+			map = sl_addline(map, line);
+			if (!map)
 				return (NULL);
 		}
 		else
@@ -86,13 +92,13 @@ char	**sl_parse_map(t_list *map)
 		matrix[i] = malloc((ft_strlen(node->content) + 1) * sizeof(char));
 		if (!(matrix[i]))
 		{
-			free_matrix(matrix);
+			sl_free_matrix(matrix);
 			return (NULL);
 		}
-		if (ft_strcpy(node->content, matrix[i]))
-			i++;
-		else
+		if (!(ft_strcpy(matrix[i], node->content)))
 			return (NULL);
+		node = node->next;
+		i++;
 	}
 	matrix[i] = NULL;
 	ft_lstclear(&map, lst_free_str);
