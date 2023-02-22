@@ -6,12 +6,15 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:32:47 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/20 13:14:18 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:10:31 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# ifndef SPRITE_SIZE
+#  define SPRITE_SIZE 32
+# endif
 # include "libft/libft.h"
 # include "libft/filem/filem.h"
 # include "libft/lists/lists.h"
@@ -42,6 +45,12 @@ typedef struct s_game
 {
 	char	**map;
 	size_t	coins;
+	t_vec2	map_size;
+	t_vec2	char_pos;
+	t_data	empty_spr;
+	t_data	wall_spr;
+	t_data	char_spr;
+	t_data	exit_spr;
 }		t_game;
 
 t_list	*sl_load_map(char *map_file);
