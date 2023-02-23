@@ -6,11 +6,28 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/22 13:39:42 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:39:58 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	sl_error_exits(int code)
+{
+	if (code == 101)
+		ft_printf("Error\n Usage is \"so_long [map file .ber]\"\n");
+	else if (code == 102)
+		ft_printf("Error\nCould not read .ber map\n");
+	else if (code == 103)
+		ft_printf("Error\nUnable to allocate memory\n");
+	else if (code == 104)
+		ft_printf("Error\nWrong map in .ber file\n");
+	else if (code == 105)
+		ft_printf("Error\nUnable to load sprites\n");
+	else
+		ft_printf("Error\nUntracked error\n");
+	exit(-1);
+}
 
 void	sl_build_scene(t_game *sl_game)
 {
@@ -30,48 +47,31 @@ void	sl_build_scene(t_game *sl_game)
 int	sl_load_process(int argc, char **argv, t_list *map, t_game *sl_game)
 {
 	if (argc != 2)
-	{
-		ft_printf("Error\n Usage is \"so_long [map file .ber]\"\n");
-		return (-1);
-	}
+		sl_error_exits(101);
 	map = sl_load_map(argv[1]);
 	if (!map)
-	{
-		ft_printf("Error\nCould not read .ber map\n");
-		return (-1);
-	}
+		sl_error_exits(102);
 	sl_game->map = sl_parse_map(map);
 	if (!(sl_game->map))
-	{
-		ft_printf("Error\nUnable to allocate memory\n");
-		return (-1);
-	}
+		sl_error_exits(103);
 	if (!sl_validate_map(sl_game->map))
-	{
-		ft_printf("Error\nWrong map in .ber file\n");
-		return (-1);
-	}
+		sl_error_exits(104);
 	sl_build_scene(sl_game);
 	return (1);
 }
 
 void	sl_play(t_game sl_game)
 {
-	t_mlxgui	gui;
-	t_data		img;
-
-	gui.mlx = mlx_init();
-	gui.win = mlx_new_window(gui.mlx, (sl_game.map_size.x * SPRITE_SIZE),
-			(sl_game.map_size.y * SPRITE_SIZE), "So Long");
-	sl_game.empty_spr.img = mlx_new_image(gui.mlx, SPRITE_SIZE, SPRITE_SIZE);
-	//sl_game.empty_spr.img = mlx_xpm_file_to_image(gui.mlx, "./empty.xpm", &img_width, &img_height);
-	sl_game.empty_spr.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	mlx_put_image_to_window(gui.mlx, gui.win, img.img, 0, 0);
-	//mlx_loop_hook(gui.mlx, render_frame, &sl_game);
-	mlx_hook(gui.win, 2, 1L << 0, close_by_esc, &gui);
-	mlx_hook(gui.win, 17, 0L, close_by_x, &gui);
-	mlx_loop(gui.mlx);
+	sl_game.grph.mlx = mlx_init();
+	sl_game.grph.win = mlx_new_window(sl_game.grph.mlx,
+			(sl_game.map_size.x	* SPR_SIZE), (sl_game.map_size.y
+			* SPR_SIZE), "So Long");
+	if (sl_load_xpms(&sl_game) == -1)
+		sl_error_exits(105);
+	mlx_loop_hook(sl_game.grph.mlx, render_frame, &sl_game);
+	mlx_hook(sl_game.grph.win, 2, 1L << 0, sl_controls, &(sl_game.grph));
+	mlx_hook(sl_game.grph.win, 17, 0L, close_by_x, &sl_game.grph);
+	mlx_loop(sl_game.grph.mlx);
 }
 
 int	main(int argc, char **argv)
