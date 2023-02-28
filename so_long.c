@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/23 14:39:58 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:13:10 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,19 @@ void	sl_build_scene(t_game *sl_game)
 		xy.y++;
 	sl_game->map_size.y = xy.y;
 	sl_game->char_pos = sl_get_pos(sl_game->map, 'P');
+	sl_game->coins = 0;
+	xy.y = 0;
+	while (sl_game->map[xy.y])
+	{
+		xy.x = 0;
+		while (sl_game->map[xy.y][xy.x])
+		{
+			if (sl_game->map[xy.y][xy.x] == 'C')
+				sl_game->coins++;
+			xy.x++;
+		}
+		xy.y++;
+	}
 }
 
 int	sl_load_process(int argc, char **argv, t_list *map, t_game *sl_game)
@@ -63,13 +76,13 @@ int	sl_load_process(int argc, char **argv, t_list *map, t_game *sl_game)
 void	sl_play(t_game sl_game)
 {
 	sl_game.grph.mlx = mlx_init();
-	sl_game.grph.win = mlx_new_window(sl_game.grph.mlx,
-			(sl_game.map_size.x	* SPR_SIZE), (sl_game.map_size.y
+	sl_game.grph.win = mlx_new_window(sl_game.grph.mlx, \
+			(sl_game.map_size.x * SPR_SIZE), (sl_game.map_size.y \
 			* SPR_SIZE), "So Long");
 	if (sl_load_xpms(&sl_game) == -1)
 		sl_error_exits(105);
 	mlx_loop_hook(sl_game.grph.mlx, render_frame, &sl_game);
-	mlx_hook(sl_game.grph.win, 2, 1L << 0, sl_controls, &(sl_game.grph));
+	mlx_hook(sl_game.grph.win, 2, 1L << 0, sl_controls, &sl_game);
 	mlx_hook(sl_game.grph.win, 17, 0L, close_by_x, &sl_game.grph);
 	mlx_loop(sl_game.grph.mlx);
 }

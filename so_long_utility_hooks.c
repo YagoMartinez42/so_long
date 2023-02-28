@@ -6,30 +6,30 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:58:10 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/23 14:52:18 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:16:28 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	sl_controls(int	keycode, t_mlxgrph *grph)
+int	sl_controls(int keycode, t_game *sl_game)
 {
 	if (keycode == 53)
-		close_by_esc(grph);
-	else if	(keycode == 13 || keycode == 62)
-		close_by_esc(grph);
-	else if	(keycode == 0 || keycode == 59)
-		close_by_esc(grph);
-	else if	(keycode == 1 || keycode == 61)
-		close_by_esc(grph);
-	else if	(keycode == 2 || keycode == 60)
-		close_by_esc(grph);
-	return (keycode);	
+		close_by_esc(&(sl_game->grph));
+	else if (keycode == 13 || keycode == 62)
+		sl_displace_player(sl_game, 'U');
+	else if (keycode == 0 || keycode == 59)
+		sl_displace_player(sl_game, 'L');
+	else if (keycode == 1 || keycode == 61)
+		sl_displace_player(sl_game, 'D');
+	else if (keycode == 2 || keycode == 60)
+		sl_displace_player(sl_game, 'R');
+	return (keycode);
 }
 
-int	close_by_esc(t_mlxgrph *grph)
+int	close_by_esc(t_mlxgrph *grph_int)
 {
-	mlx_destroy_window(grph->mlx, grph->win);
+	mlx_destroy_window(grph_int->mlx, grph_int->win);
 	system("leaks -q so_long"); //ojo!
 	exit(0);
 }

@@ -6,14 +6,29 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:32:47 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/22 13:10:31 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:13:53 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# ifndef SPRITE_SIZE
-#  define SPRITE_SIZE 32
+# ifndef SPR_SIZE
+#  define SPR_SIZE 48
+# endif
+# ifndef CHAR_FILE
+#  define CHAR_FILE "sprites/char.xpm"
+# endif
+# ifndef COIN_FILE
+#  define COIN_FILE "sprites/coin48.xpm"
+# endif
+# ifndef EMPTY_FILE
+#  define EMPTY_FILE "sprites/empty48.xpm"
+# endif
+# ifndef EXIT_FILE
+#  define EXIT_FILE "sprites/exit48.xpm"
+# endif
+# ifndef WALL_FILE
+#  define WALL_FILE "sprites/wall48.xpm"
 # endif
 # include "libft/libft.h"
 # include "libft/filem/filem.h"
@@ -33,36 +48,45 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		wd;
+	int		ht;
 }		t_data;
 
-typedef struct s_mlxgui
+typedef struct s_mlxgrph
 {
 	void	*mlx;
 	void	*win;
-}		t_mlxgui;
+}		t_mlxgrph;
 
 typedef struct s_game
 {
-	char	**map;
-	size_t	coins;
-	t_vec2	map_size;
-	t_vec2	char_pos;
-	t_data	empty_spr;
-	t_data	wall_spr;
-	t_data	char_spr;
-	t_data	exit_spr;
+	char		**map;
+	t_mlxgrph	grph;
+	size_t		coins;
+	t_vec2		map_size;
+	t_vec2		char_pos;
+	t_data		char_spr;
+	t_data		coin_spr;
+	t_data		empty_spr;
+	t_data		exit_spr;
+	t_data		wall_spr;
 }		t_game;
 
+void	sl_error_exits(int code);
 t_list	*sl_load_map(char *map_file);
 char	**sl_parse_map(t_list *map);
 int		sl_validate_map(char **map);
 size_t	ft_strspn(char *str, char *set);
 char	**sl_copy_matrix(char **matrix);
 void	sl_flood(char **matrix, t_vec2 pos);
+int		sl_load_xpms(t_game *sl_game);
 t_vec2	sl_get_pos(char **matrix, char item);
 void	sl_free_matrix(char **matrix);
-int		close_by_esc(int keycode, t_mlxgui *gui);
-int		close_by_x(t_mlxgui *gui);
+int		close_by_esc(t_mlxgrph *grph);
+int		sl_controls(int	keycode, t_game *sl_game);
+void	sl_displace_player(t_game *sl_game, char dis_dir);
+void	sl_check_conditions(t_game *sl_game, t_vec2 pos);
+int		close_by_x(t_mlxgrph *grph);
 int		render_frame(t_game *sl_game);
 
 #endif
