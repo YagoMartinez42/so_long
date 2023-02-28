@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/25 17:13:10 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:56:42 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	sl_build_scene(t_game *sl_game)
 		xy.y++;
 	sl_game->map_size.y = xy.y;
 	sl_game->char_pos = sl_get_pos(sl_game->map, 'P');
+	sl_game->map[sl_game->char_pos.y][sl_game->char_pos.x] = '0';
+	sl_game->moves = 0;
 	sl_game->coins = 0;
 	xy.y = 0;
 	while (sl_game->map[xy.y])

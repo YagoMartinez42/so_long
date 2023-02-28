@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:32:47 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/25 17:13:53 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/28 12:47:07 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #  define SPR_SIZE 48
 # endif
 # ifndef CHAR_FILE
-#  define CHAR_FILE "sprites/char.xpm"
+#  define CHAR_FILE "sprites/char48.xpm"
 # endif
 # ifndef COIN_FILE
 #  define COIN_FILE "sprites/coin48.xpm"
@@ -63,6 +63,7 @@ typedef struct s_game
 	char		**map;
 	t_mlxgrph	grph;
 	size_t		coins;
+	size_t		moves;
 	t_vec2		map_size;
 	t_vec2		char_pos;
 	t_data		char_spr;

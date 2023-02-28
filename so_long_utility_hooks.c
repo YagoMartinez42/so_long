@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:58:10 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/25 17:16:28 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:02:59 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 int	sl_controls(int keycode, t_game *sl_game)
 {
+	ft_printf("%i\n", keycode);
 	if (keycode == 53)
 		close_by_esc(&(sl_game->grph));
-	else if (keycode == 13 || keycode == 62)
+	else if (keycode == 13 || keycode == 126)
 		sl_displace_player(sl_game, 'U');
-	else if (keycode == 0 || keycode == 59)
+	else if (keycode == 0 || keycode == 123)
 		sl_displace_player(sl_game, 'L');
-	else if (keycode == 1 || keycode == 61)
+	else if (keycode == 1 || keycode == 125)
 		sl_displace_player(sl_game, 'D');
-	else if (keycode == 2 || keycode == 60)
+	else if (keycode == 2 || keycode == 124)
 		sl_displace_player(sl_game, 'R');
 	return (keycode);
 }

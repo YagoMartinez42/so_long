@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:48:36 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/25 17:14:35 by samartin         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:01:02 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int	sl_load_xpms(t_game *sl_game)
 
 void	sl_put_imgs(t_game *sl_game, t_vec2 xy)
 {
-	if (sl_game->map[xy.y][xy.x] == 'P')
-		mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
-			sl_game->char_spr.img, (xy.x * SPR_SIZE), (xy.y * SPR_SIZE));
-	else if (sl_game->map[xy.y][xy.x] == 'E' && sl_game->coins <= 0)
+	if (sl_game->map[xy.y][xy.x] == 'E' && sl_game->coins <= 0)
 		mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
 			sl_game->exit_spr.img, (xy.x * SPR_SIZE), (xy.y * SPR_SIZE));
 	else if (sl_game->map[xy.y][xy.x] == 'C')
@@ -44,6 +41,10 @@ void	sl_put_imgs(t_game *sl_game, t_vec2 xy)
 	else
 		mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
 			sl_game->empty_spr.img, (xy.x * SPR_SIZE), (xy.y * SPR_SIZE));
+	mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
+			sl_game->char_spr.img, (sl_game->char_pos.x * SPR_SIZE), \
+			(sl_game->char_pos.y * SPR_SIZE));
+	
 }
 
 void	sl_displace_player(t_game *sl_game, char dis_dir)
@@ -62,9 +63,10 @@ void	sl_displace_player(t_game *sl_game, char dis_dir)
 	if (sl_game->map[dest.y][dest.x] != '1')
 	{
 		sl_check_conditions(sl_game, dest);
-		sl_game->map[sl_game->char_pos.y][sl_game->char_pos.x] = '0';
-		sl_game->map[dest.y][dest.x] = 'P';
+		if (sl_game->map[dest.y][dest.x] == 'C')
+			sl_game->map[dest.y][dest.x] = '0';
 		sl_game->char_pos = dest;
+		sl_game->moves++;
 	}
 }
 
@@ -72,6 +74,13 @@ void	sl_check_conditions(t_game *sl_game, t_vec2 pos)
 {
 	if (sl_game->map[pos.y][pos.x] == 'C')
 		sl_game->coins--;
+	ft_printf("Coins: %i\n", sl_game->coins);
+	ft_printf("Movements: %i\n", sl_game->moves);
+	if (sl_game->map[pos.y][pos.x] == 'E' && !sl_game->coins)
+	{
+		ft_printf("Completed!\n");
+		exit(1);
+	}
 }
 
 int	render_frame(t_game *sl_game)
@@ -87,7 +96,6 @@ int	render_frame(t_game *sl_game)
 			sl_put_imgs(sl_game, xy);
 			xy.x++;
 		}
-		ft_printf("\n");
 		xy.y++;
 	}
 	return (1);
