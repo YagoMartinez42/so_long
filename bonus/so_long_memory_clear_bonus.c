@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_memory_clear.c                             :+:      :+:    :+:   */
+/*   so_long_memory_clear_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:56:39 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 12:39:35 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:45:38 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void	sl_clear_all(t_game *sl_game)
 		mlx_destroy_image(sl_game->grph.mlx, sl_game->exit_spr.img);
 	if (sl_game->wall_spr.img)
 		mlx_destroy_image(sl_game->grph.mlx, sl_game->wall_spr.img);
-	sl_free_matrix(sl_game->map);
+	sl_free_matrix(sl_game->map);		
 }
