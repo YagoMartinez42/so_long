@@ -2,25 +2,37 @@ NAME	:= so_long
 LFTDIR  := libft
 LIBFT	:= libft.a
 CC		:= gcc
+VPATH	:= bonus
 CFLAGS	:= -Wall -Wextra -Werror
 RM		:= rm -rf
 SRC		:= so_long.c so_long_load.c so_long_validation.c so_long_map_utils.c \
-			so_long_utility_hooks.c so_long_play.c
+			so_long_utility_hooks.c so_long_play.c so_long_memory_clear.c
+BNSRC	:= so_long_bonus.c so_long_load_bonus.c so_long_validation_bonus.c \
+			so_long_map_utils_bonus.c so_long_utility_hooks_bonus.c \
+			so_long_play_bonus.c so_long_memory_clear_bonus.c
 OBJ		:= ${SRC:.c=.o}
+BNOBJ	:= ${BNSRC:.c=.o}
 
 all: ${NAME}
 
 ${NAME}: ${OBJ} ${LIBFT}
-	${CC} ${OBJ} ${LFTDIR}/${LIBFT} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+	${CC} ${OBJ} ${LFTDIR}/${LIBFT} -Lmlx -lmlx -framework OpenGL \
+		-framework AppKit -fsanitize=address -g3 -o ${NAME}
+
+bonus: ${BNOBJ} ${LIBFT}
+	${CC} ${BNOBJ} ${LFTDIR}/${LIBFT} -Lmlx -lmlx -framework OpenGL \
+		-framework AppKit -o so_long_bonus
+	mv so_long_bonus bonus
 
 ${LIBFT}:
 	cd ${LFTDIR} && make all
 
 clean:
-	${RM} ${OBJ}
+	${RM} ${OBJ} ${BNOBJ}
 	cd ${LFTDIR} &&	make clean
 
 fclean: clean
+	${RM} ${NAME}
 	${RM} ${NAME}
 	${RM} ${LIBFT}
 

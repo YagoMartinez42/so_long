@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 12:12:53 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:23:26 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//¡CUIDAO, MELÓN
+//QUE AÚN HAY COMENTARIOS INLINE!
 
 #include "so_long.h"
 
@@ -95,11 +98,17 @@ void	sl_play(t_game sl_game)
 	mlx_loop(sl_game.grph.mlx);
 }
 
+void	check_leaks()
+{
+	system("leaks -q so_long");
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*map;
 	t_game	sl_game;
-
+	
+	atexit(check_leaks);
 	map = NULL;
 	if (sl_load_process(argc, argv, map, &sl_game) == -1)
 		return (-1);
