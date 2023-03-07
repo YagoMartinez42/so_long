@@ -6,11 +6,11 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:16:21 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 12:26:48 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:05:43 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	val_walls(char **map, size_t map_len)
 {

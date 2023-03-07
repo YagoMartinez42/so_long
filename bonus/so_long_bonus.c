@@ -6,14 +6,11 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 12:23:26 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:22:46 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//¡CUIDAO, MELÓN
-//QUE AÚN HAY COMENTARIOS INLINE!
-
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	sl_error_exits(int code)
 {
@@ -30,34 +27,6 @@ void	sl_error_exits(int code)
 	else
 		ft_printf("Error\nUntracked error\n");
 	exit(-1);
-}
-
-void	sl_build_scene(t_game *sl_game)
-{
-	t_vec2	xy;
-
-	sl_game->map_size.x = 0;
-	while (sl_game->map[0][sl_game->map_size.x])
-		sl_game->map_size.x++;
-	sl_game->map_size.y = 0;
-	while (sl_game->map[sl_game->map_size.y])
-		sl_game->map_size.y++;
-	sl_game->char_pos = sl_get_pos(sl_game->map, 'P');
-	sl_game->map[sl_game->char_pos.y][sl_game->char_pos.x] = '0';
-	sl_game->moves = 0;
-	sl_game->coins = 0;
-	xy.y = 0;
-	while (sl_game->map[xy.y])
-	{
-		xy.x = 0;
-		while (sl_game->map[xy.y][xy.x])
-		{
-			if (sl_game->map[xy.y][xy.x] == 'C')
-				sl_game->coins++;
-			xy.x++;
-		}
-		xy.y++;
-	}
 }
 
 int	sl_load_process(int argc, char **argv, t_list *map, t_game *sl_game)
@@ -82,11 +51,6 @@ void	sl_play(t_game sl_game)
 	sl_game.grph.win = mlx_new_window(sl_game.grph.mlx, \
 			(sl_game.map_size.x * SPR_SIZE), (sl_game.map_size.y \
 			* SPR_SIZE), "So Long");
-	sl_game.char_spr.img = NULL;
-	sl_game.coin_spr.img = NULL;
-	sl_game.empty_spr.img = NULL;
-	sl_game.exit_spr.img = NULL;
-	sl_game.wall_spr.img = NULL;
 	if (sl_load_xpms(&sl_game) == -1)
 	{
 		sl_clear_all(&sl_game);

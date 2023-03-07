@@ -6,11 +6,11 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:16:26 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 12:24:52 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:05:22 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 size_t	ft_strspn(char *str, char *set)
 {

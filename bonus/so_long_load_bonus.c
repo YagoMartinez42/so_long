@@ -6,11 +6,11 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:11:51 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 12:21:10 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:18:32 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 t_list	*sl_addline(t_list *map, char *line)
 {
@@ -98,4 +98,32 @@ char	**sl_parse_map(t_list *map)
 	matrix[i] = NULL;
 	ft_lstclear(&map, lst_free_str);
 	return (matrix);
+}
+
+void	sl_build_scene(t_game *sl_game)
+{
+	t_vec2	xy;
+
+	sl_game->map_size.x = 0;
+	while (sl_game->map[0][sl_game->map_size.x])
+		sl_game->map_size.x++;
+	sl_game->map_size.y = 0;
+	while (sl_game->map[sl_game->map_size.y])
+		sl_game->map_size.y++;
+	sl_game->char_pos = sl_get_pos(sl_game->map, 'P');
+	sl_game->map[sl_game->char_pos.y][sl_game->char_pos.x] = '0';
+	sl_game->moves = 0;
+	sl_game->coins = 0;
+	xy.y = 0;
+	while (sl_game->map[xy.y])
+	{
+		xy.x = 0;
+		while (sl_game->map[xy.y][xy.x])
+		{
+			if (sl_game->map[xy.y][xy.x] == 'C')
+				sl_game->coins++;
+			xy.x++;
+		}
+		xy.y++;
+	}
 }
