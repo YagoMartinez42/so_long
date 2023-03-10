@@ -18,7 +18,7 @@ all: ${NAME}
 
 ${NAME}: ${OBJ} ${LIBFT}
 	${CC} ${OBJ} ${LFTDIR}/${LIBFT} -Lmlx -lmlx -framework OpenGL \
-		-framework AppKit -fsanitize=address -g3 -o ${NAME}
+		-framework AppKit -o ${NAME}
 
 bonus: ${BNOBJ} ${LIBFT}
 	${CC} ${BNOBJ} ${LFTDIR}/${LIBFT} -Lmlx -lmlx -framework OpenGL \

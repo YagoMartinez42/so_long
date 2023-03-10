@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 18:28:17 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/07 11:25:59 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:55:28 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,27 @@ int	sl_load_player_anims(t_game *sl_game)
 {
 	size_t	i;
 	char	*filepath;
+	char	*num;
 
 	filepath = malloc(40 * sizeof(char));
 	i = 0;
-	while (i < 12)
+	while (i < CHR_SPR_CNT)
 	{
-		filepath = ft_strcat(ft_strcat(CHAR_FILETMPL, ft_itoa(i)), ".xpm");
-ft_printf("file: %s\n", filepath);
+		filepath = ft_strcpy(filepath, CHAR_FILETMPL);
+		filepath = ft_strcat(ft_strcat(filepath, num = ft_itoa(i)), ".xpm");
 		sl_game->char_spr[i].img = mlx_xpm_file_to_image(sl_game->grph.mlx, \
 			filepath, &(sl_game->char_spr[i].wd), &(sl_game->char_spr[i].ht));
+		free(num);
 		if (!sl_game->char_spr[i].img)
 			return (-1);
 		i++;
 	}
+	free(filepath);
 	return (1);
 }
 
 void	sl_set_img20(t_game *sl_game)
 {
-	sl_game->char_pos.x *= SPR_SIZE;
-	sl_game->char_pos.y *= SPR_SIZE;
 	sl_game->key_on = 1;
 	sl_game->char_step = 0;
 	sl_game->char_dir = 1;

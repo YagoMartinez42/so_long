@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:56:39 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/06 13:55:16 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:56:43 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sl_clear_all(t_game *sl_game)
 	if (sl_game->wall_spr.img)
 		mlx_destroy_image(sl_game->grph.mlx, sl_game->wall_spr.img);
 	i = 0;
-	while (i < 12)
+	while (i < CHR_SPR_CNT)
 	{
 		if (sl_game->char_spr[i].img)
 			mlx_destroy_image(sl_game->grph.mlx, sl_game->char_spr[i].img);

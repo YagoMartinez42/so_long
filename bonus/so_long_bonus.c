@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/07 11:22:46 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:02:13 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	sl_play(t_game sl_game)
 {
 	sl_game.grph.mlx = mlx_init();
 	sl_game.grph.win = mlx_new_window(sl_game.grph.mlx, \
-			(sl_game.map_size.x * SPR_SIZE), (sl_game.map_size.y \
-			* SPR_SIZE), "So Long");
+			(sl_game.map_size.x * SPR_SZ), (sl_game.map_size.y \
+			* SPR_SZ), "So Long");
 	if (sl_load_xpms(&sl_game) == -1)
 	{
 		sl_clear_all(&sl_game);
@@ -62,17 +62,11 @@ void	sl_play(t_game sl_game)
 	mlx_loop(sl_game.grph.mlx);
 }
 
-void	check_leaks()
-{
-	system("leaks -q so_long");
-}
-
 int	main(int argc, char **argv)
 {
 	t_list	*map;
 	t_game	sl_game;
-	
-	atexit(check_leaks);
+
 	map = NULL;
 	if (sl_load_process(argc, argv, map, &sl_game) == -1)
 		return (-1);

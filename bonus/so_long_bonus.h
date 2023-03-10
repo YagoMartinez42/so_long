@@ -6,14 +6,20 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:32:47 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/07 11:17:11 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:59:37 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
-# ifndef SPR_SIZE
-#  define SPR_SIZE 48
+# ifndef SPR_SZ
+#  define SPR_SZ 48
+# endif
+# ifndef ANIM_ST
+#  define ANIM_ST 6
+# endif
+# ifndef CHR_SPR_CNT
+#  define CHR_SPR_CNT 12
 # endif
 # ifndef CHAR_FILETMPL
 #  define CHAR_FILETMPL "sprites/char48_"
@@ -34,6 +40,7 @@
 # include "../libft/filem/filem.h"
 # include "../libft/lists/lists.h"
 # include <mlx.h>
+# include <time.h>
 
 typedef struct s_vec2
 {
@@ -65,6 +72,7 @@ typedef struct s_game
 	t_mlxgrph	grph;
 	size_t		coins;
 	size_t		moves;
+	clock_t		anim_start;
 	t_vec2		map_size;
 	t_vec2		char_pos;
 	size_t		char_step;
