@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 18:28:17 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/10 13:55:28 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:18:57 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	sl_load_player_anims(t_game *sl_game)
 void	sl_set_img20(t_game *sl_game)
 {
 	sl_game->key_on = 1;
+	sl_game->game_on = 1;
 	sl_game->char_step = 0;
 	sl_game->char_dir = 1;
 	sl_game->coin_spr.img = NULL;

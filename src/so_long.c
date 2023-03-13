@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/10 13:59:15 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:34:26 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	sl_play(t_game sl_game)
 {
 	sl_game.grph.mlx = mlx_init();
 	sl_game.grph.win = mlx_new_window(sl_game.grph.mlx, \
-			(sl_game.map_size.x * SPR_SZ), (sl_game.map_size.y \
-			* SPR_SZ), "So Long");
+			(sl_game.map_size.x * SPR_SIZE), (sl_game.map_size.y \
+			* SPR_SIZE), "So Long");
 	sl_game.char_spr.img = NULL;
 	sl_game.coin_spr.img = NULL;
 	sl_game.empty_spr.img = NULL;

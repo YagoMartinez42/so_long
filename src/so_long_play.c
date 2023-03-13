@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:48:36 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 11:40:16 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:35:38 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ void	sl_put_imgs(t_game *sl_game, t_vec2 xy)
 	else
 		mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
 			sl_game->empty_spr.img, (xy.x * SPR_SIZE), (xy.y * SPR_SIZE));
-	mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
-			sl_game->char_spr.img, (sl_game->char_pos.x * SPR_SIZE), \
-			(sl_game->char_pos.y * SPR_SIZE));
 }
 
 void	sl_displace_player(t_game *sl_game, char dis_dir)
@@ -106,5 +103,8 @@ int	render_frame(t_game *sl_game)
 		}
 		xy.y++;
 	}
+	mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
+			sl_game->char_spr.img, (sl_game->char_pos.x * SPR_SIZE), \
+			(sl_game->char_pos.y * SPR_SIZE));
 	return (1);
 }

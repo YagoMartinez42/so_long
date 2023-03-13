@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:32:47 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/10 13:59:37 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:27:59 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@
 #  define CHR_SPR_CNT 12
 # endif
 # ifndef CHAR_FILETMPL
-#  define CHAR_FILETMPL "sprites/char48_"
+#  define CHAR_FILETMPL "bonus_sprites/char48_"
 # endif
 # ifndef COIN_FILE
-#  define COIN_FILE "sprites/coin48.xpm"
+#  define COIN_FILE "bonus_sprites/coin48.xpm"
 # endif
 # ifndef EMPTY_FILE
-#  define EMPTY_FILE "sprites/empty48.xpm"
+#  define EMPTY_FILE "bonus_sprites/empty48.xpm"
 # endif
 # ifndef EXIT_FILE
-#  define EXIT_FILE "sprites/exit48.xpm"
+#  define EXIT_FILE "bonus_sprites/exit48.xpm"
 # endif
 # ifndef WALL_FILE
-#  define WALL_FILE "sprites/wall48.xpm"
+#  define WALL_FILE "bonus_sprites/wall48.xpm"
 # endif
 # include "../libft/libft.h"
 # include "../libft/filem/filem.h"
@@ -69,6 +69,7 @@ typedef struct s_game
 {
 	char		**map;
 	int			key_on;
+	int			game_on;
 	t_mlxgrph	grph;
 	size_t		coins;
 	size_t		moves;
@@ -98,6 +99,8 @@ void	lst_free_str(void *content);
 void	sl_clear_all(t_game *sl_game);
 int		sl_controls(int keycode, t_game *sl_game);
 void	sl_displace_player(t_game *sl_game, size_t dis_dir);
+t_vec2	sl_get_step(t_game *sl_game);
+void	sl_chrono(t_game *sl_game);
 void	sl_check_conditions(t_game *sl_game, t_vec2 pos);
 int		close_window(t_game *sl_game);
 int		render_frame(t_game *sl_game);

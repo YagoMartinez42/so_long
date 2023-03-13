@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:48:36 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/10 14:10:23 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:55:31 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,15 @@
 void	sl_put_player(t_game *sl_game)
 {
 	size_t	spr_idx;
-	size_t	step_x;
-	size_t	step_y;
-	clock_t	elapsed;
+	t_vec2	step;
 
-	step_x = 0;
-	step_y = 0;
-	if (sl_game->key_on == 0)
-	{
-		if (sl_game->char_dir == 0)
-			step_y = (ANIM_ST - sl_game->char_step) * (SPR_SZ / ANIM_ST);
-		else if (sl_game->char_dir == 1)
-			step_x = (ANIM_ST - sl_game->char_step) * (SPR_SZ / ANIM_ST);
-		else if (sl_game->char_dir == 2)
-			step_y = -1 * ((ANIM_ST - sl_game->char_step) * (SPR_SZ / ANIM_ST));
-		else if (sl_game->char_dir == 3)
-			step_x = -1 * ((ANIM_ST - sl_game->char_step) * (SPR_SZ / ANIM_ST));
-	}
+	step = sl_get_step(sl_game);
 	spr_idx = ((ANIM_ST / 2) * sl_game->char_dir) \
 			+ (sl_game->char_step % (CHR_SPR_CNT / 4));
 	mlx_put_image_to_window(sl_game->grph.mlx, sl_game->grph.win, \
 			sl_game->char_spr[spr_idx].img, (sl_game->char_pos.x * SPR_SZ) \
-			+ step_x, (sl_game->char_pos.y * SPR_SZ) + step_y);
-	if (sl_game->key_on == 0)
-	{
-		elapsed = clock() - sl_game->anim_start;
-		if (elapsed > CLOCKS_PER_SEC / 20)
-		{
-			sl_game->char_step++;
-			sl_game->anim_start = clock();
-		}
-		if (sl_game->char_step >= ANIM_ST)
-		{
-			sl_game->key_on = 1;
-			sl_game->char_step = 0;
-		}
-	}
+			+ step.x, (sl_game->char_pos.y * SPR_SZ) + step.y);
+	sl_chrono(sl_game);
 }
 
 void	sl_put_imgs(t_game *sl_game, t_vec2 xy)
@@ -103,8 +76,8 @@ void	sl_check_conditions(t_game *sl_game, t_vec2 pos)
 	}
 	if (sl_game->map[pos.y][pos.x] == 'E' && !sl_game->coins)
 	{
-		ft_printf("Completed!\n");
-		exit(1);
+		ft_printf("Map Completed! 🥳\n");
+		close_window(sl_game);
 	}
 }
 
@@ -129,7 +102,7 @@ int	render_frame(t_game *sl_game)
 	ft_strcpy(moves, "Moves: ");
 	ft_strcat(moves, num = ft_itoa((int)sl_game->moves));
 	mlx_string_put(sl_game->grph.mlx, sl_game->grph.win, \
-			8, 16, 0x880088, moves);
+			8, 16, 0x550055, moves);
 	free (num);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:32:47 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 12:12:23 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:27:16 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 # ifndef WALL_FILE
 #  define WALL_FILE "sprites/wall48.xpm"
 # endif
-# include "libft/libft.h"
-# include "libft/filem/filem.h"
-# include "libft/lists/lists.h"
+# include "../libft/libft.h"
+# include "../libft/filem/filem.h"
+# include "../libft/lists/lists.h"
 # include <mlx.h>
 
 typedef struct s_vec2
