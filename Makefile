@@ -10,7 +10,7 @@ SRC		:= so_long.c so_long_load.c so_long_validation.c so_long_map_utils.c \
 BNSRC	:= so_long_bonus.c so_long_load_bonus.c so_long_validation_bonus.c \
 			so_long_map_utils_bonus.c so_long_utility_hooks_bonus.c \
 			so_long_play_bonus.c so_long_memory_clear_bonus.c \
-			so_long_img_load_bonus.c so_long_animations.c
+			so_long_img_load_bonus.c so_long_animations_bonus.c 
 OBJ		:= ${SRC:.c=.o}
 BNOBJ	:= ${BNSRC:.c=.o}
 

@@ -6,11 +6,11 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:07:05 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/03 16:30:11 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/13 16:06:29 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "filem.h"
 
 static void	*gnl_memcpy(void *dst, const void *src, int n)
 {
