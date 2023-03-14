@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 11:32:47 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/13 12:27:16 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:25:52 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_vec2	sl_get_pos(char **matrix, char item);
 void	sl_free_matrix(char **matrix);
 void	lst_free_str(void *content);
 void	sl_clear_all(t_game *sl_game);
-int		sl_controls(int	keycode, t_game *sl_game);
+int		sl_controls(int keycode, t_game *sl_game);
 void	sl_displace_player(t_game *sl_game, char dis_dir);
 void	sl_check_conditions(t_game *sl_game, t_vec2 pos);
 int		close_window(t_game *sl_game);
