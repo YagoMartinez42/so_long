@@ -17,15 +17,17 @@ BNOBJ	:= ${BNSRC:.c=.o}
 all: ${NAME}
 
 ${NAME}: ${OBJ} ${LIBFT}
-	${CC} ${OBJ} ${LFTDIR}/${LIBFT} -Lmlx -lmlx -framework OpenGL \
+	${CC} ${OBJ} ${LIBFT} -Imlx -lmlx -framework OpenGL \
 		-framework AppKit -o ${NAME}
 
 bonus: ${BNOBJ} ${LIBFT}
-	${CC} ${BNOBJ} ${LFTDIR}/${LIBFT} -Lmlx -lmlx -framework OpenGL \
+	${CC} ${BNOBJ} ${LIBFT} -Imlx -lmlx -framework OpenGL \
 		-framework AppKit -o so_long_bonus
 
 ${LIBFT}:
 	cd ${LFTDIR} && make all
+	cd ${LFTDIR} && mv ${LIBFT} ..
+
 
 clean:
 	${RM} ${OBJ} ${BNOBJ}
