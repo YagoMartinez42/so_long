@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:04:13 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/14 15:06:39 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:49:34 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sl_chrono(t_game *sl_game)
 	if (sl_game->key_on == 0)
 	{
 		elapsed = clock() - sl_game->anim_start;
-		if (elapsed > CLOCKS_PER_SEC / 20)
+		if (elapsed > CLOCKS_PER_SEC / 25)
 		{
 			sl_game->char_step++;
 			sl_game->anim_start = clock();

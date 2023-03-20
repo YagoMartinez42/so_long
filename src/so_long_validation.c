@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:16:21 by samartin          #+#    #+#             */
-/*   Updated: 2023/02/15 17:16:34 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:27:50 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ int	sl_validate_map(char **map)
 	int		contents;
 
 	map_len.x = ft_strlen(map[0]);
+	map_len.y = 0;
+	while (map[map_len.y])
+		map_len.y++;
+	if (map_len.x > 55 || map_len.y > 25)
+		return (0);
 	contents = 0;
 	if (!(val_walls(map, map_len.x)))
 		return (0);

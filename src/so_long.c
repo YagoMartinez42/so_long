@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:35:00 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/10 15:34:26 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:37:28 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	sl_build_scene(t_game *sl_game)
 
 int	sl_load_process(int argc, char **argv, t_list *map, t_game *sl_game)
 {
-	if (argc != 2)
+	if (argc != 2 || ft_strncmp((argv[1] + ft_strlen(argv[1]) - 4), ".ber", 4))
 		sl_error_exits(101);
 	map = sl_load_map(argv[1]);
 	if (!map)
