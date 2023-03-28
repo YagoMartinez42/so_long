@@ -6,7 +6,7 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:16:21 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/20 15:27:50 by samartin         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:13:25 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,27 @@ static int	val_walls(char **map, size_t map_len)
 	return (1);
 }
 
-static int	val_cep(char *line, int contents)
+static int	val_cep_in_line(char *line, int contents)
 {
-	if (ft_strchr(line, 'C'))
-		contents += 4;
-	if (ft_strchr(line, 'E'))
+	while (*line)
 	{
-		if (contents & 2)
-			return (0);
-		else
-			contents += 2;
-	}
-	if (ft_strchr(line, 'P'))
-	{
-		if (contents & 1)
-			return (0);
-		else
-			contents += 1;
+		if (*line == 'C')
+			contents += 4;
+		if (*line == 'E')
+		{
+			if (contents & 2)
+				return (0);
+			else
+				contents += 2;
+		}
+		if (*line == 'P')
+		{
+			if (contents & 1)
+				return (0);
+			else
+				contents += 1;
+		}
+		line++;
 	}
 	return (contents);
 }
@@ -65,7 +69,7 @@ static int	val_contents(char **map, size_t map_len)
 	while (map[y])
 	{
 		if (ft_strspn(map[y], "01CEP") == map_len)
-			contents = val_cep(map[y], contents);
+			contents = val_cep_in_line(map[y], contents);
 		else
 			return (0);
 		y++;
