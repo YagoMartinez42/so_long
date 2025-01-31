@@ -3,7 +3,8 @@ BNNAME	:= so_long_bonus
 LFTDIR  := libft
 LIBFT	:= libft.a
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -Werror
+CFLAGS	:= -Wall -Wextra -Werror -Iminilibx-linux
+MLXFLG	:= -Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lmlx -lm -lz
 RM		:= rm -rf
 SRC		:=	src/so_long.c \
 			src/so_long_load.c \
@@ -31,12 +32,10 @@ ${LIBFT}:
 	cd ${LFTDIR} && mv ${LIBFT} ..
 
 ${NAME}: ${OBJ} ${LIBFT}
-	${CC} ${OBJ} ${LIBFT} -Imlx -lmlx -framework OpenGL \
-		-framework AppKit -o ${NAME}
+	${CC} ${OBJ} ${LIBFT} ${CFLAGS} ${MLXFLG} -o ${NAME}
 
 ${BNNAME}: ${BNOBJ} ${LIBFT}
-	${CC} ${BNOBJ} ${LIBFT} -Imlx -lmlx -framework OpenGL \
-		-framework AppKit -o so_long_bonus
+	${CC} ${BNOBJ} ${LIBFT} ${CFLAGS} ${MLXFLG} -o ${BNNAME}
 
 bonus: ${BNNAME}
 

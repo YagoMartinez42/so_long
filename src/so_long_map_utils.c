@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_map_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samartin <samartin@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:16:26 by samartin          #+#    #+#             */
-/*   Updated: 2023/03/02 11:01:54 by samartin         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:31:23 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	**sl_copy_matrix(char **matrix)
 
 void	sl_flood(char **matrix, t_vec2 pos)
 {
-	if (pos.y < 0 || !(matrix[pos.y]) || pos.x < 0 || !(matrix[pos.y][pos.x])
+	if (pos.y == __UINT64_MAX__ || !(matrix[pos.y]) || pos.x == __UINT64_MAX__
+		|| !(matrix[pos.y][pos.x])
 		|| !(ft_strchr("0EPC", matrix[pos.y][pos.x])))
 		return ;
 	matrix[pos.y][pos.x] = 'F';

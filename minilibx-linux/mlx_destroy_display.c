@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samartin <samartin@student.42madrid.es>    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 17:17:11 by samartin          #+#    #+#             */
-/*   Updated: 2025/01/02 18:36:33 by samartin         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "mlx_int.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	unsigned int	pos;
-
-	pos = 0;
-	while (pos < n)
-	{	
-		if (((unsigned char *)s)[pos] == (unsigned char)c)
-			return ((void *)s + pos);
-		pos++;
-	}
-	return (0);
+	XCloseDisplay(xvar->display);
 }

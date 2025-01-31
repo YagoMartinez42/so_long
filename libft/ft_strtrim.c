@@ -6,15 +6,18 @@
 /*   By: samartin <samartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 17:28:37 by samartin          #+#    #+#             */
-/*   Updated: 2022/10/01 11:34:12 by samartin         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:40:59 by samartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * Main working part of the function separated only due norm needs.
+ */
 static char	*trim_it(char const *s1, char const *set, unsigned int *len)
 {
-	unsigned int	i;
+	int	i;
 
 	while (*s1)
 	{
@@ -37,6 +40,22 @@ static char	*trim_it(char const *s1, char const *set, unsigned int *len)
 	return ((char *)s1);
 }
 
+/**
+ * Trims the characters specified in the set parameter from the beginning and
+ * end of the string s1.
+ * 
+ * @param s1 A pointer to a string that needs to be trimmed.
+ * @param set A string of characters that are considered to be whitespace for
+ * this use. Any amount of these characters will be removed from only the
+ * beginning and end of the s1 string (not the central part delimited by the
+ * first and last ocurrences of other characters out of the set).
+ * 
+ * @return A pointer to a newly allocated string that is a copy of the input
+ * string s1 with leading and trailing characters from the input string set
+ * removed. If s1 or set is null, it returns NULL. If s1 is an empty string or
+ * all characters in it where part of the set, it returns a pointer to a newly
+ * allocated empty string.
+ */
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char			*str;
