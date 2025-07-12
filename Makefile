@@ -4,7 +4,9 @@ LFTDIR  := libft
 LIBFT	:= libft.a
 CC		:= gcc
 CFLAGS	:= -Wall -Wextra -Werror -Iminilibx-linux
-MLXFLG	:= -Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lmlx -lm -lz
+MLXFLG	:= -lmlx -lXext -lX11 -Lminilibx-linux -lm
+MLXDIR	:= minilibx-linux
+MLXLIB	:= minilibx-linux/libmlx.a
 RM		:= rm -rf
 SRC		:=	src/so_long.c \
 			src/so_long_load.c \
@@ -31,10 +33,13 @@ ${LIBFT}:
 	cd ${LFTDIR} && make all
 	cd ${LFTDIR} && mv ${LIBFT} ..
 
-${NAME}: ${OBJ} ${LIBFT}
+${MLXLIB}:
+	make -C ${MLXDIR}
+
+${NAME}: ${OBJ} ${LIBFT} ${MLXLIB}
 	${CC} ${OBJ} ${LIBFT} ${CFLAGS} ${MLXFLG} -o ${NAME}
 
-${BNNAME}: ${BNOBJ} ${LIBFT}
+${BNNAME}: ${BNOBJ} ${LIBFT} ${MLXLIB}
 	${CC} ${BNOBJ} ${LIBFT} ${CFLAGS} ${MLXFLG} -o ${BNNAME}
 
 bonus: ${BNNAME}
@@ -42,11 +47,13 @@ bonus: ${BNNAME}
 clean:
 	${RM} ${OBJ} ${BNOBJ}
 	cd ${LFTDIR} &&	make clean
+	cd ${MLXDIR} &&	make clean
 
 fclean: clean
 	${RM} ${NAME}
 	${RM} ${BNNAME}
 	${RM} ${LIBFT}
+	${RM} ${MLXLIB}
 
 re: fclean all
 
