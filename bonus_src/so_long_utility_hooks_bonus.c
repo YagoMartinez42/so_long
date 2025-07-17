@@ -16,13 +16,13 @@ int	sl_controls(int keycode, t_game *sl_game)
 {
 	if (keycode == 53)
 		close_window(sl_game);
-	else if ((keycode == 13 || keycode == 126) && sl_game->key_on == 1)
+	else if ((keycode == 119 || keycode == 65362) && sl_game->key_on == 1)
 		sl_displace_player(sl_game, 0);
-	else if ((keycode == 0 || keycode == 123) && sl_game->key_on == 1)
+	else if ((keycode == 97 || keycode == 65361) && sl_game->key_on == 1)
 		sl_displace_player(sl_game, 1);
-	else if ((keycode == 1 || keycode == 125) && sl_game->key_on == 1)
+	else if ((keycode == 115 || keycode == 65364) && sl_game->key_on == 1)
 		sl_displace_player(sl_game, 2);
-	else if ((keycode == 2 || keycode == 124) && sl_game->key_on == 1)
+	else if ((keycode == 100 || keycode == 65363) && sl_game->key_on == 1)
 		sl_displace_player(sl_game, 3);
 	return (keycode);
 }
