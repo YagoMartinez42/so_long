@@ -12,36 +12,12 @@
 
 #include "so_long.h"
 
-void sl_set_transparency(t_data img)
-{
-	int* offset;
-	int i;
-
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	offset = (int*)img.addr;
-	while (i < 6)
-	{
-		*offset = 0;
-		offset++;
-		i++;
-	}
-	offset += 46;
-	i = 0;
-	while (i < 6)
-	{
-		*offset = 0;
-		offset++;
-		i++;
-	}
-}
-
 int	sl_load_xpms(t_game *sl_game)
 {
 	sl_game->char_spr.img = mlx_xpm_file_to_image(sl_game->grph.mlx, \
 			CHAR_FILE, &(sl_game->char_spr.wd), &(sl_game->char_spr.ht));
 	if (!sl_game->char_spr.img)
 		return (-1);
-	sl_set_transparency(sl_game->char_spr);
 	sl_game->coin_spr.img = mlx_xpm_file_to_image(sl_game->grph.mlx, \
 			COIN_FILE, &(sl_game->coin_spr.wd), &(sl_game->coin_spr.ht));
 	if (!sl_game->coin_spr.img)
